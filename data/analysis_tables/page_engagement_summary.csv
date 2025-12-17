@@ -1,0 +1,11 @@
+Variation,process_step,unique_visits,unique_visitors
+Control,start,30910,25908
+Control,step_1,23548,21234
+Control,step_2,20138,19165
+Control,step_3,18300,17699
+Control,confirm,16046,15566
+Test,start,33157,28736
+Test,step_1,28285,25554
+Test,step_2,24503,22978
+Test,step_3,22186,21270
+Test,confirm,21731,19505
