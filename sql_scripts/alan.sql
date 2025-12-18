@@ -126,6 +126,67 @@ JOIN (SELECT variation, unique_clients as starters FROM FunnelCounts WHERE proce
   ON f.variation = total.variation
 ORDER BY f.variation, 
          FIELD(f.process_step, 'start', 'step_1', 'step_2', 'step_3', 'confirm');
+         
+         
+-- full funnel performance visits TIME LOCKED
+WITH Step0 AS (
+    SELECT 
+        e.variation, 
+        w.client_id, 
+        w.date_time AS start_time
+    FROM abtest.experiment e
+    JOIN abtest.web w ON e.client_id = w.client_id
+    WHERE w.process_step = 'start'
+),
+Step1 AS (
+    SELECT w.*, s0.variation
+    FROM abtest.web w
+    JOIN Step0 s0 ON w.client_id = s0.client_id
+    WHERE w.process_step = 'step_1' 
+      AND w.date_time > s0.start_time
+),
+Step2 AS (
+    SELECT w.*, s1.variation
+    FROM abtest.web w
+    JOIN Step1 s1 ON w.client_id = s1.client_id
+    WHERE w.process_step = 'step_2' 
+      AND w.date_time > s1.date_time
+),
+Step3 AS (
+    SELECT w.*, s2.variation
+    FROM abtest.web w
+    JOIN Step2 s2 ON w.client_id = s2.client_id
+    WHERE w.process_step = 'step_3' 
+      AND w.date_time > s2.date_time
+),
+Confirm AS (
+    SELECT w.*, s3.variation
+    FROM abtest.web w
+    JOIN Step3 s3 ON w.client_id = s3.client_id
+    WHERE w.process_step = 'confirm' 
+      AND w.date_time > s3.date_time
+),
+AllVisits AS (
+    SELECT variation, 'start' AS process_step, COUNT(*) AS total_visits FROM Step0 GROUP BY 1
+    UNION ALL
+    SELECT variation, 'step_1', COUNT(*) FROM Step1 GROUP BY 1
+    UNION ALL
+    SELECT variation, 'step_2', COUNT(*) FROM Step2 GROUP BY 1
+    UNION ALL
+    SELECT variation, 'step_3', COUNT(*) FROM Step3 GROUP BY 1
+    UNION ALL
+    SELECT variation, 'confirm', COUNT(*) FROM Confirm GROUP BY 1
+)
+SELECT 
+    v.variation,
+    v.process_step,
+    v.total_visits,
+    -- Percentage of visits compared to the total starting visits
+    (v.total_visits * 100.0 / s.start_visits) AS pct_of_start_visits
+FROM AllVisits v
+JOIN (SELECT variation, total_visits AS start_visits FROM AllVisits WHERE process_step = 'start') s
+  ON v.variation = s.variation
+ORDER BY v.variation, FIELD(v.process_step, 'start', 'step_1', 'step_2', 'step_3', 'confirm');
 
          
 -- Step by step drop-off analysis OLD
@@ -163,6 +224,46 @@ SELECT
      )) AS retention_from_prev_step_pct
 FROM StepCounts
 ORDER BY variation, FIELD(process_step, 'start', 'step_1', 'step_2', 'step_3', 'confirm');
+
+-- AVG time spent per step
+WITH step_durations AS (
+    SELECT 
+        e.variation,
+        w.client_id,
+        w.visit_id,
+        w.process_step AS current_step,
+        w.date_time AS step_start,
+        LEAD(w.date_time) OVER (PARTITION BY w.visit_id ORDER BY w.date_time) AS next_step_start
+    FROM web w
+    JOIN experiment e ON w.client_id = e.client_id
+)
+SELECT 
+    variation,
+    current_step,
+    AVG(TIMESTAMPDIFF(SECOND, step_start, next_step_start)) AS avg_duration_seconds
+FROM step_durations
+WHERE next_step_start IS NOT NULL
+GROUP BY variation, current_step
+ORDER BY current_step, variation;
+
+
+-- AVG TIME SPENT per age group
+SELECT 
+    e.variation,
+    CASE 
+        WHEN d.client_age < 30 THEN 'Under 30'
+        WHEN d.client_age BETWEEN 30 AND 55 THEN '30-55'
+        ELSE 'Over 55'
+    END AS age_group,
+    w.process_step,
+    AVG(TIMESTAMPDIFF(SECOND, w.date_time, next_step.date_time)) AS avg_time_sec
+FROM web w
+JOIN experiment e ON w.client_id = e.client_id
+JOIN demo d ON w.client_id = d.client_id
+LEFT JOIN web next_step ON w.visit_id = next_step.visit_id 
+    AND next_step.date_time > w.date_time
+GROUP BY 1, 2, 3
+ORDER BY 3, 1;
 
 
 
@@ -296,7 +397,6 @@ FROM
 -- if z score is negative, the test version performed worse than control version
 -- if z score is between -1.96 and 1.96 the result is not statistically significant
      WITH Stats AS (
-    --  N (starters) and X (converters) for both groups
     SELECT 
         Variation,
         MAX(CASE WHEN process_step = 'start' THEN unique_visitors END) AS n,
@@ -306,15 +406,12 @@ FROM
 ),
 Calculations AS (
     SELECT 
-        -- Control stats
         c.n AS n_ctrl, 
         c.x AS x_ctrl,
         (c.x * 1.0 / c.n) AS p_ctrl,
-        -- Test stats
         t.n AS n_test, 
         t.x AS x_test,
         (t.x * 1.0 / t.n) AS p_test,
-        -- Pooled proportion (p-hat)
         ((c.x + t.x) * 1.0 / (c.n + t.n)) AS p_pooled
     FROM Stats c
     JOIN Stats t ON c.Variation = 'Control' AND t.Variation = 'Test'
@@ -323,7 +420,6 @@ SELECT
     p_ctrl AS control_conversion_rate,
     p_test AS test_conversion_rate,
     (p_test - p_ctrl) AS absolute_difference,
-    -- Calculate Z-score: (p1 - p2) / SE
     (p_test - p_ctrl) / 
         SQRT(p_pooled * (1 - p_pooled) * (1.0/n_ctrl + 1.0/n_test)) AS z_score
 FROM Calculations;
@@ -439,6 +535,67 @@ SELECT
           1.330274429 * POW(t_val, 5)) ) AS p_value
 FROM PValueApprox;
 
+
+
+-- Lift, Z-Score and P-Value NEW using VISITS and Time Locked
+
+WITH RawStats AS (
+    SELECT 
+        e.variation,
+        e.client_id,
+        MIN(w.date_time) AS first_start_time
+    FROM abtest.experiment e
+    JOIN abtest.web w ON e.client_id = w.client_id
+    WHERE w.process_step = 'start'
+    GROUP BY e.variation, e.client_id
+),
+Stats AS (
+    SELECT 
+        rs.variation,
+        COUNT(w_start.client_id) AS n,
+        COUNT(w_confirm.client_id) AS x
+    FROM RawStats rs
+    JOIN abtest.web w_start ON rs.client_id = w_start.client_id AND w_start.process_step = 'start'
+    LEFT JOIN abtest.web w_confirm ON rs.client_id = w_confirm.client_id 
+        AND w_confirm.process_step = 'confirm' 
+        AND w_confirm.date_time > rs.first_start_time
+    GROUP BY rs.variation
+),
+Calculations AS (
+    SELECT 
+        c.n AS n_ctrl, c.x AS x_ctrl, (c.x * 1.0 / NULLIF(c.n, 0)) AS p_ctrl,
+        t.n AS n_test, t.x AS x_test, (t.x * 1.0 / NULLIF(t.n, 0)) AS p_test,
+        ((c.x + t.x) * 1.0 / NULLIF(c.n + t.n, 0)) AS p_pooled
+    FROM Stats c
+    JOIN Stats t ON c.variation = 'Control' AND t.variation = 'Test'
+),
+ZScoreCalc AS (
+    SELECT 
+        *,
+        (p_test - p_ctrl) / 
+            NULLIF(SQRT(p_pooled * (1.0 - p_pooled) * (1.0/NULLIF(n_ctrl,0) + 1.0/NULLIF(n_test,0))), 0) AS z_score
+    FROM Calculations
+),
+PValueApprox AS (
+    SELECT 
+        *,
+        ABS(z_score) AS abs_z,
+        1.0 / (1.0 + 0.2316419 * ABS(z_score)) AS t_val
+    FROM ZScoreCalc
+)
+SELECT 
+    p_ctrl AS control_conversion_rate,
+    p_test AS test_conversion_rate,
+    ((p_test - p_ctrl) / NULLIF(p_ctrl, 0)) * 100 AS lift_pct,
+    z_score,
+    2 * ( (1.0 / SQRT(2 * PI())) * EXP(-0.5 * abs_z * abs_z) * (
+          0.319381530 * t_val + 
+         -0.356563782 * POW(t_val, 2) + 
+          1.781477937 * POW(t_val, 3) + 
+         -1.821255978 * POW(t_val, 4) + 
+          1.330274429 * POW(t_val, 5)) ) AS p_value
+FROM PValueApprox;
+
 -- Sample Ratio Mismatch query
 SELECT 
     Variation, 
@@ -460,7 +617,6 @@ WITH RawCounts AS (
 SRM_Calc AS (
     SELECT 
         SUM(observed_n) AS total_n,
-        -- Observed counts for each group
         MAX(CASE WHEN Variation = 'Control' THEN observed_n END) AS o_ctrl,
         MAX(CASE WHEN Variation = 'Test' THEN observed_n END) AS o_test
     FROM RawCounts
@@ -470,9 +626,7 @@ ChiSquare AS (
         o_ctrl,
         o_test,
         total_n,
-        -- Expected count (assuming 50/50 split)
         (total_n / 2.0) AS expected_n,
-        -- Chi-Square formula: Σ( (O - E)^2 / E )
         (POWER(o_ctrl - (total_n / 2.0), 2) / (total_n / 2.0)) + 
         (POWER(o_test - (total_n / 2.0), 2) / (total_n / 2.0)) AS chi_sq_stat
     FROM SRM_Calc
@@ -481,8 +635,6 @@ SELECT
     o_ctrl AS control_users,
     o_test AS test_users,
     chi_sq_stat,
-    -- If chi_sq_stat > 3.84, the p-value is < 0.05 (SRM is likely)
-    -- If chi_sq_stat > 6.63, the p-value is < 0.01 (SRM is very likely)
     CASE 
         WHEN chi_sq_stat > 6.63 THEN 'FAIL: Massive Sample Mismatch'
         WHEN chi_sq_stat > 3.84 THEN 'WARNING: Slight Mismatch'
