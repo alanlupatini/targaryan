@@ -569,10 +569,12 @@ Calculations AS (
     FROM Stats c
     JOIN Stats t ON c.variation = 'Control' AND t.variation = 'Test'
 ),
+-- updating z score calculation to expect at least 5% uplift
 ZScoreCalc AS (
     SELECT 
         *,
-        (p_test - p_ctrl) / 
+        -- subtracting (p_ctrl * 0.05) to shift the baseline to a 5% lift
+        ((p_test - p_ctrl) - (p_ctrl * 0.05)) / 
             NULLIF(SQRT(p_pooled * (1.0 - p_pooled) * (1.0/NULLIF(n_ctrl,0) + 1.0/NULLIF(n_test,0))), 0) AS z_score
     FROM Calculations
 ),
@@ -595,6 +597,7 @@ SELECT
          -1.821255978 * POW(t_val, 4) + 
           1.330274429 * POW(t_val, 5)) ) AS p_value
 FROM PValueApprox;
+
 
 -- Sample Ratio Mismatch query
 SELECT 
