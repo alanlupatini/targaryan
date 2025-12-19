@@ -1,8 +1,0 @@
-data:
-  raw:
-    file1: "../data/raw/df_final_experiment_clients.csv"
-    file2: "../data/raw/df_final_web_data_pt_1.csv"
-    file3: "../data/raw/df_final_web_data_pt_1.csv"
-  clean:
-
-    ...
