@@ -1,0 +1,1621 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20253.25.1210.1815                               -->
+<workbook original-version='18.1' source-build='2025.3.1 (20253.25.1210.1815)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AnimationOnByDefault />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelExtractV2 />
+    <ObjectModelTableType />
+    <SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <SortTagCleanup />
+    <_.fcp.VConnDownstreamExtractsWithWarnings.true...VConnDownstreamExtractsWithWarnings />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='df_demo_clean.csv++ (Multiple Connections)' inline='true' name='federated.13t3zab0fpe0271af688102zziht' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='df_demo_clean' name='textscan.1cenzm50olhv5111zb0kf1gord7z'>
+            <connection class='textscan' directory='C:/Users/ASUS/Desktop/courses/projects/week_5/targaryan/data/clean' filename='df_demo_clean.csv' password='' server='' />
+          </named-connection>
+          <named-connection caption='df_experiment_clean' name='textscan.182wqgc17c1p8o1eo3hqi0iqra45'>
+            <connection class='textscan' directory='C:/Users/ASUS/Desktop/courses/projects/week_5/targaryan/data/clean' filename='df_experiment_clean.csv' password='' server='' />
+          </named-connection>
+          <named-connection caption='df_web_clean' name='textscan.00o2c3e0wass9p14navii1htx01k'>
+            <connection class='textscan' directory='C:/Users/ASUS/Desktop/courses/projects/week_5/targaryan/data/clean' filename='df_web_clean.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation join='full' type='join'>
+          <clause type='join'>
+            <expression op='='>
+              <expression op='[df_demo_clean.csv+].[client_id]' />
+              <expression op='[df_web_clean.csv].[client_id]' />
+            </expression>
+          </clause>
+          <relation join='full' type='join'>
+            <clause type='join'>
+              <expression op='='>
+                <expression op='[df_demo_clean.csv+].[client_id]' />
+                <expression op='[df_experiment_clean.csv].[client_id]' />
+              </expression>
+            </clause>
+            <relation all='true' name='df_demo_clean.csv+' type='union'>
+              <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                <column datatype='integer' name='client_id' />
+                <column datatype='real' name='client_tenure_years' />
+                <column datatype='real' name='client_tenure_months' />
+                <column datatype='real' name='client_age' />
+                <column datatype='string' name='gender' />
+                <column datatype='real' name='num_accounts' />
+                <column datatype='real' name='balance' />
+                <column datatype='real' name='calls_6_months' />
+                <column datatype='real' name='logons_6_months' />
+                <column datatype='string' name='Table Name' />
+              </columns>
+              <relation connection='textscan.1cenzm50olhv5111zb0kf1gord7z' name='df_demo_clean.csv' table='[df_demo_clean#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='integer' name='client_id' ordinal='0' />
+                  <column datatype='real' name='client_tenure_years' ordinal='1' />
+                  <column datatype='real' name='client_tenure_months' ordinal='2' />
+                  <column datatype='real' name='client_age' ordinal='3' />
+                  <column datatype='string' name='gender' ordinal='4' />
+                  <column datatype='real' name='num_accounts' ordinal='5' />
+                  <column datatype='real' name='balance' ordinal='6' />
+                  <column datatype='real' name='calls_6_months' ordinal='7' />
+                  <column datatype='real' name='logons_6_months' ordinal='8' />
+                </columns>
+              </relation>
+            </relation>
+            <relation connection='textscan.182wqgc17c1p8o1eo3hqi0iqra45' name='df_experiment_clean.csv' table='[df_experiment_clean#csv]' type='table'>
+              <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                <column datatype='integer' name='client_id' ordinal='0' />
+                <column datatype='string' name='variation' ordinal='1' />
+              </columns>
+            </relation>
+          </relation>
+          <relation connection='textscan.00o2c3e0wass9p14navii1htx01k' name='df_web_clean.csv' table='[df_web_clean#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+              <column datatype='integer' name='client_id' ordinal='0' />
+              <column datatype='string' name='visitor_id' ordinal='1' />
+              <column datatype='string' name='visit_id' ordinal='2' />
+              <column datatype='string' name='process_step' ordinal='3' />
+              <column datatype='datetime' name='date_time' ordinal='4' />
+            </columns>
+          </relation>
+        </relation>
+        <cols>
+          <map key='[Table Name]' value='[df_demo_clean.csv+].[Table Name]' />
+          <map key='[balance]' value='[df_demo_clean.csv+].[balance]' />
+          <map key='[calls_6_months]' value='[df_demo_clean.csv+].[calls_6_months]' />
+          <map key='[client_age]' value='[df_demo_clean.csv+].[client_age]' />
+          <map key='[client_id (df_experiment_clean.csv)]' value='[df_experiment_clean.csv].[client_id]' />
+          <map key='[client_id (df_web_clean.csv)]' value='[df_web_clean.csv].[client_id]' />
+          <map key='[client_id]' value='[df_demo_clean.csv+].[client_id]' />
+          <map key='[client_tenure_months]' value='[df_demo_clean.csv+].[client_tenure_months]' />
+          <map key='[client_tenure_years]' value='[df_demo_clean.csv+].[client_tenure_years]' />
+          <map key='[date_time]' value='[df_web_clean.csv].[date_time]' />
+          <map key='[gender]' value='[df_demo_clean.csv+].[gender]' />
+          <map key='[logons_6_months]' value='[df_demo_clean.csv+].[logons_6_months]' />
+          <map key='[num_accounts]' value='[df_demo_clean.csv+].[num_accounts]' />
+          <map key='[process_step]' value='[df_web_clean.csv].[process_step]' />
+          <map key='[variation]' value='[df_experiment_clean.csv].[variation]' />
+          <map key='[visit_id]' value='[df_web_clean.csv].[visit_id]' />
+          <map key='[visitor_id]' value='[df_web_clean.csv].[visitor_id]' />
+        </cols>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[df_demo_clean.csv+]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[df_experiment_clean.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[df_web_clean.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>client_id</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[client_id]</local-name>
+            <parent-name>[df_demo_clean.csv+]</parent-name>
+            <remote-alias>client_id</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>client_tenure_years</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[client_tenure_years]</local-name>
+            <parent-name>[df_demo_clean.csv+]</parent-name>
+            <remote-alias>client_tenure_years</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>client_tenure_months</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[client_tenure_months]</local-name>
+            <parent-name>[df_demo_clean.csv+]</parent-name>
+            <remote-alias>client_tenure_months</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>client_age</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[client_age]</local-name>
+            <parent-name>[df_demo_clean.csv+]</parent-name>
+            <remote-alias>client_age</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>gender</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[gender]</local-name>
+            <parent-name>[df_demo_clean.csv+]</parent-name>
+            <remote-alias>gender</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>num_accounts</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[num_accounts]</local-name>
+            <parent-name>[df_demo_clean.csv+]</parent-name>
+            <remote-alias>num_accounts</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>balance</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[balance]</local-name>
+            <parent-name>[df_demo_clean.csv+]</parent-name>
+            <remote-alias>balance</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>calls_6_months</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[calls_6_months]</local-name>
+            <parent-name>[df_demo_clean.csv+]</parent-name>
+            <remote-alias>calls_6_months</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>logons_6_months</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[logons_6_months]</local-name>
+            <parent-name>[df_demo_clean.csv+]</parent-name>
+            <remote-alias>logons_6_months</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Table Name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Table Name]</local-name>
+            <parent-name>[df_demo_clean.csv+]</parent-name>
+            <remote-alias>Table Name</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>client_id</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[client_id (df_experiment_clean.csv)]</local-name>
+            <parent-name>[df_experiment_clean.csv]</parent-name>
+            <remote-alias>client_id</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>variation</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[variation]</local-name>
+            <parent-name>[df_experiment_clean.csv]</parent-name>
+            <remote-alias>variation</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>client_id</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[client_id (df_web_clean.csv)]</local-name>
+            <parent-name>[df_web_clean.csv]</parent-name>
+            <remote-alias>client_id</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>visitor_id</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[visitor_id]</local-name>
+            <parent-name>[df_web_clean.csv]</parent-name>
+            <remote-alias>visitor_id</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>visit_id</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[visit_id]</local-name>
+            <parent-name>[df_web_clean.csv]</parent-name>
+            <remote-alias>visit_id</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>process_step</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[process_step]</local-name>
+            <parent-name>[df_web_clean.csv]</parent-name>
+            <remote-alias>process_step</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>date_time</remote-name>
+            <remote-type>135</remote-type>
+            <local-name>[date_time]</local-name>
+            <parent-name>[df_web_clean.csv]</parent-name>
+            <remote-alias>date_time</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='df_demo_clean.csv' datatype='table' name='[__tableau_internal_object_id__].[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]' role='measure' type='quantitative' />
+      <column caption='Balance' datatype='real' name='[balance]' role='measure' type='quantitative' />
+      <column caption='Calls 6 Months' datatype='real' name='[calls_6_months]' role='measure' type='quantitative' />
+      <column caption='Client Age' datatype='real' name='[client_age]' role='measure' type='quantitative' />
+      <column caption='Client Id (Df Experiment Clean.Csv)' datatype='integer' name='[client_id (df_experiment_clean.csv)]' role='dimension' type='ordinal' />
+      <column caption='Client Id (Df Web Clean.Csv)' datatype='integer' name='[client_id (df_web_clean.csv)]' role='dimension' type='ordinal' />
+      <column caption='Client Id' datatype='integer' name='[client_id]' role='dimension' type='ordinal' />
+      <column caption='Client Tenure Months' datatype='real' name='[client_tenure_months]' role='measure' type='quantitative' />
+      <column caption='Client Tenure Years' datatype='real' name='[client_tenure_years]' role='measure' type='quantitative' />
+      <column caption='Date Time' datatype='datetime' name='[date_time]' role='dimension' type='ordinal' />
+      <column caption='Gender' datatype='string' name='[gender]' role='dimension' type='nominal' />
+      <column caption='Logons 6 Months' datatype='real' name='[logons_6_months]' role='measure' type='quantitative' />
+      <column caption='Num Accounts' datatype='real' name='[num_accounts]' role='measure' type='quantitative' />
+      <column caption='Process Step' datatype='string' name='[process_step]' role='dimension' type='nominal' />
+      <column caption='Variation' datatype='string' name='[variation]' role='dimension' type='nominal' />
+      <column caption='Visit Id' datatype='string' name='[visit_id]' role='dimension' type='nominal' />
+      <column caption='Visitor Id' datatype='string' name='[visitor_id]' role='dimension' type='nominal' />
+      <extract _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' object-id='' units='records'>
+        <connection access_mode='readonly' author-locale='en_US' class='hyper' dbname='C:/Users/ASUS/AppData/Local/Temp/TableauTemp/#TableauTemp_1n30yr20ozi3ct13z9z2a1d2h4lb.hyper' default-settings='hyper' schema='Extract' sslmode='' tablename='Extract' update-time='01/05/2026 02:27:14 PM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <cols>
+            <map key='[Table Name]' value='[Extract].[Table Name]' />
+            <map key='[balance]' value='[Extract].[balance]' />
+            <map key='[calls_6_months]' value='[Extract].[calls_6_months]' />
+            <map key='[client_age]' value='[Extract].[client_age]' />
+            <map key='[client_id (df_experiment_clean.csv)]' value='[Extract].[client_id]' />
+            <map key='[client_id (df_web_clean.csv)]' value='[Extract].[client_id1]' />
+            <map key='[client_id]' value='[Extract].[client_id2]' />
+            <map key='[client_tenure_months]' value='[Extract].[client_tenure_months]' />
+            <map key='[client_tenure_years]' value='[Extract].[client_tenure_years]' />
+            <map key='[date_time]' value='[Extract].[date_time]' />
+            <map key='[gender]' value='[Extract].[gender]' />
+            <map key='[logons_6_months]' value='[Extract].[logons_6_months]' />
+            <map key='[num_accounts]' value='[Extract].[num_accounts]' />
+            <map key='[process_step]' value='[Extract].[process_step]' />
+            <map key='[variation]' value='[Extract].[variation]' />
+            <map key='[visit_id]' value='[Extract].[visit_id]' />
+            <map key='[visitor_id]' value='[Extract].[visitor_id]' />
+          </cols>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>client_id2</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[client_id]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>client_id2</remote-alias>
+              <ordinal>0</ordinal>
+              <family>df_demo_clean.csv+</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>144721</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>client_tenure_years</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[client_tenure_years]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>client_tenure_years</remote-alias>
+              <ordinal>1</ordinal>
+              <family>df_demo_clean.csv+</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>87</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>client_tenure_months</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[client_tenure_months]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>client_tenure_months</remote-alias>
+              <ordinal>2</ordinal>
+              <family>df_demo_clean.csv+</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>1163</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>client_age</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[client_age]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>client_age</remote-alias>
+              <ordinal>3</ordinal>
+              <family>df_demo_clean.csv+</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>267</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>gender</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[gender]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>gender</remote-alias>
+              <ordinal>4</ordinal>
+              <family>df_demo_clean.csv+</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>4</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>num_accounts</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[num_accounts]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>num_accounts</remote-alias>
+              <ordinal>5</ordinal>
+              <family>df_demo_clean.csv+</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>6</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>balance</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[balance]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>balance</remote-alias>
+              <ordinal>6</ordinal>
+              <family>df_demo_clean.csv+</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>141118</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>calls_6_months</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[calls_6_months]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>calls_6_months</remote-alias>
+              <ordinal>7</ordinal>
+              <family>df_demo_clean.csv+</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>9</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>logons_6_months</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[logons_6_months]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>logons_6_months</remote-alias>
+              <ordinal>8</ordinal>
+              <family>df_demo_clean.csv+</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>10</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Table Name</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Table Name]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Table Name</remote-alias>
+              <ordinal>9</ordinal>
+              <family>df_demo_clean.csv+</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>client_id</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[client_id (df_experiment_clean.csv)]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>client_id</remote-alias>
+              <ordinal>10</ordinal>
+              <family>df_experiment_clean.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>102966</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>variation</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[variation]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>variation</remote-alias>
+              <ordinal>11</ordinal>
+              <family>df_experiment_clean.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>3</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>client_id1</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[client_id (df_web_clean.csv)]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>client_id1</remote-alias>
+              <ordinal>12</ordinal>
+              <family>df_web_clean.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>192919</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>visitor_id</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[visitor_id]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>visitor_id</remote-alias>
+              <ordinal>13</ordinal>
+              <family>df_web_clean.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>190165</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>visit_id</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[visit_id]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>visit_id</remote-alias>
+              <ordinal>14</ordinal>
+              <family>df_web_clean.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>192919</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>process_step</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[process_step]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>process_step</remote-alias>
+              <ordinal>15</ordinal>
+              <family>df_web_clean.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>6</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>date_time</remote-name>
+              <remote-type>135</remote-type>
+              <local-name>[date_time]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>date_time</remote-alias>
+              <ordinal>16</ordinal>
+              <family>df_web_clean.csv</family>
+              <local-type>datetime</local-type>
+              <aggregation>Year</aggregation>
+              <approx-count>452395</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE]</object-id>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Germany&quot;' />
+      </semantic-values>
+      <object-graph>
+        <objects>
+          <object caption='df_demo_clean.csv' id='df_demo_clean.csv_19B6104F78824AF5B9526BBBDD4267AE'>
+            <properties context=''>
+              <relation join='full' type='join'>
+                <clause type='join'>
+                  <expression op='='>
+                    <expression op='[df_demo_clean.csv+].[client_id]' />
+                    <expression op='[df_web_clean.csv].[client_id]' />
+                  </expression>
+                </clause>
+                <relation join='full' type='join'>
+                  <clause type='join'>
+                    <expression op='='>
+                      <expression op='[df_demo_clean.csv+].[client_id]' />
+                      <expression op='[df_experiment_clean.csv].[client_id]' />
+                    </expression>
+                  </clause>
+                  <relation all='true' name='df_demo_clean.csv+' type='union'>
+                    <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                      <column datatype='integer' name='client_id' />
+                      <column datatype='real' name='client_tenure_years' />
+                      <column datatype='real' name='client_tenure_months' />
+                      <column datatype='real' name='client_age' />
+                      <column datatype='string' name='gender' />
+                      <column datatype='real' name='num_accounts' />
+                      <column datatype='real' name='balance' />
+                      <column datatype='real' name='calls_6_months' />
+                      <column datatype='real' name='logons_6_months' />
+                      <column datatype='string' name='Table Name' />
+                    </columns>
+                    <relation connection='textscan.1cenzm50olhv5111zb0kf1gord7z' name='df_demo_clean.csv' table='[df_demo_clean#csv]' type='table'>
+                      <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                        <column datatype='integer' name='client_id' ordinal='0' />
+                        <column datatype='real' name='client_tenure_years' ordinal='1' />
+                        <column datatype='real' name='client_tenure_months' ordinal='2' />
+                        <column datatype='real' name='client_age' ordinal='3' />
+                        <column datatype='string' name='gender' ordinal='4' />
+                        <column datatype='real' name='num_accounts' ordinal='5' />
+                        <column datatype='real' name='balance' ordinal='6' />
+                        <column datatype='real' name='calls_6_months' ordinal='7' />
+                        <column datatype='real' name='logons_6_months' ordinal='8' />
+                      </columns>
+                    </relation>
+                  </relation>
+                  <relation connection='textscan.182wqgc17c1p8o1eo3hqi0iqra45' name='df_experiment_clean.csv' table='[df_experiment_clean#csv]' type='table'>
+                    <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                      <column datatype='integer' name='client_id' ordinal='0' />
+                      <column datatype='string' name='variation' ordinal='1' />
+                    </columns>
+                  </relation>
+                </relation>
+                <relation connection='textscan.00o2c3e0wass9p14navii1htx01k' name='df_web_clean.csv' table='[df_web_clean#csv]' type='table'>
+                  <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                    <column datatype='integer' name='client_id' ordinal='0' />
+                    <column datatype='string' name='visitor_id' ordinal='1' />
+                    <column datatype='string' name='visit_id' ordinal='2' />
+                    <column datatype='string' name='process_step' ordinal='3' />
+                    <column datatype='datetime' name='date_time' ordinal='4' />
+                  </columns>
+                </relation>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Extract' table='[Extract].[Extract]' type='table' />
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+    <datasource caption='full_funnel_performance_TIMELOCKED' inline='true' name='federated.0y9mmv71kbu6rp0zmrv5t0h9fc0i' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='full_funnel_performance_TIMELOCKED' name='textscan.1hzdxii1li4t421294s160675eat'>
+            <connection class='textscan' directory='C:/Users/ASUS/Desktop/courses/projects/week_5/targaryan/data/analysis_tables' filename='full_funnel_performance_TIMELOCKED.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.1hzdxii1li4t421294s160675eat' name='full_funnel_performance_TIMELOCKED.csv' table='[full_funnel_performance_TIMELOCKED#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='string' name='variation' ordinal='0' />
+            <column datatype='string' name='process_step' ordinal='1' />
+            <column datatype='integer' name='unique_clients' ordinal='2' />
+            <column datatype='real' name='pct_of_starters_reached' ordinal='3' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[full_funnel_performance_TIMELOCKED.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>variation</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[variation]</local-name>
+            <parent-name>[full_funnel_performance_TIMELOCKED.csv]</parent-name>
+            <remote-alias>variation</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[full_funnel_performance_TIMELOCKED.csv_A70668C905204B2CB2BCBB2C09EA79A6]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>process_step</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[process_step]</local-name>
+            <parent-name>[full_funnel_performance_TIMELOCKED.csv]</parent-name>
+            <remote-alias>process_step</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[full_funnel_performance_TIMELOCKED.csv_A70668C905204B2CB2BCBB2C09EA79A6]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>unique_clients</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[unique_clients]</local-name>
+            <parent-name>[full_funnel_performance_TIMELOCKED.csv]</parent-name>
+            <remote-alias>unique_clients</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[full_funnel_performance_TIMELOCKED.csv_A70668C905204B2CB2BCBB2C09EA79A6]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>pct_of_starters_reached</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[pct_of_starters_reached]</local-name>
+            <parent-name>[full_funnel_performance_TIMELOCKED.csv]</parent-name>
+            <remote-alias>pct_of_starters_reached</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[full_funnel_performance_TIMELOCKED.csv_A70668C905204B2CB2BCBB2C09EA79A6]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='full_funnel_performance_TIMELOCKED.csv' datatype='table' name='[__tableau_internal_object_id__].[full_funnel_performance_TIMELOCKED.csv_A70668C905204B2CB2BCBB2C09EA79A6]' role='measure' type='quantitative' />
+      <column caption='Pct Of Starters Reached' datatype='real' name='[pct_of_starters_reached]' role='measure' type='quantitative' />
+      <column caption='Process Step' datatype='string' name='[process_step]' role='dimension' type='nominal' />
+      <column caption='Unique Clients' datatype='integer' name='[unique_clients]' role='measure' type='quantitative' />
+      <column caption='Variation' datatype='string' name='[variation]' role='dimension' type='nominal' />
+      <extract _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' object-id='' units='records'>
+        <connection access_mode='readonly' author-locale='en_US' class='hyper' dbname='C:/Users/ASUS/AppData/Local/Temp/TableauTemp/#TableauTemp_0eq1fns0d08e3w15dn4gl06419ur.hyper' default-settings='hyper' schema='Extract' sslmode='' tablename='Extract' update-time='01/05/2026 02:32:33 PM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>variation</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[variation]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>variation</remote-alias>
+              <ordinal>0</ordinal>
+              <family>full_funnel_performance_TIMELOCKED.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[full_funnel_performance_TIMELOCKED.csv_A70668C905204B2CB2BCBB2C09EA79A6]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>process_step</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[process_step]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>process_step</remote-alias>
+              <ordinal>1</ordinal>
+              <family>full_funnel_performance_TIMELOCKED.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>5</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[full_funnel_performance_TIMELOCKED.csv_A70668C905204B2CB2BCBB2C09EA79A6]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>unique_clients</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[unique_clients]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>unique_clients</remote-alias>
+              <ordinal>2</ordinal>
+              <family>full_funnel_performance_TIMELOCKED.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>10</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[full_funnel_performance_TIMELOCKED.csv_A70668C905204B2CB2BCBB2C09EA79A6]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>pct_of_starters_reached</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[pct_of_starters_reached]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>pct_of_starters_reached</remote-alias>
+              <ordinal>3</ordinal>
+              <family>full_funnel_performance_TIMELOCKED.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>9</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[full_funnel_performance_TIMELOCKED.csv_A70668C905204B2CB2BCBB2C09EA79A6]</object-id>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Germany&quot;' />
+      </semantic-values>
+      <object-graph>
+        <objects>
+          <object caption='full_funnel_performance_TIMELOCKED.csv' id='full_funnel_performance_TIMELOCKED.csv_A70668C905204B2CB2BCBB2C09EA79A6'>
+            <properties context=''>
+              <relation connection='textscan.1hzdxii1li4t421294s160675eat' name='full_funnel_performance_TIMELOCKED.csv' table='[full_funnel_performance_TIMELOCKED#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='string' name='variation' ordinal='0' />
+                  <column datatype='string' name='process_step' ordinal='1' />
+                  <column datatype='integer' name='unique_clients' ordinal='2' />
+                  <column datatype='real' name='pct_of_starters_reached' ordinal='3' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Extract' table='[Extract].[Extract]' type='table' />
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+    <datasource caption='full_funnel_performance_NEW' inline='true' name='federated.0po1ji00iy7hw714lqger0v9nszy' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='full_funnel_performance_NEW' name='textscan.051pdrq1elmk2q16qhm0b0wj6t1r'>
+            <connection class='textscan' directory='C:/Users/ASUS/Desktop/courses/projects/week_5/targaryan/data/analysis_tables' filename='full_funnel_performance_NEW.csv' password='' server='' />
+          </named-connection>
+          <named-connection caption='df_web_clean' name='textscan.099nyxo0koadn21228ve41x498uu'>
+            <connection class='textscan' directory='C:/Users/ASUS/Desktop/courses/projects/week_5/targaryan/data/clean' filename='df_web_clean.csv' password='' server='' />
+          </named-connection>
+          <named-connection caption='df_experiment_clean' name='textscan.1b0kzil1712x4q1cd3grp0fcgh1t'>
+            <connection class='textscan' directory='C:/Users/ASUS/Desktop/courses/projects/week_5/targaryan/data/clean' filename='df_experiment_clean.csv' password='' server='' />
+          </named-connection>
+          <named-connection caption='df_demo_clean' name='textscan.1v3ivwm1jqgeqm1fu2hid1ms3d63'>
+            <connection class='textscan' directory='C:/Users/ASUS/Desktop/courses/projects/week_5/targaryan/data/clean' filename='df_demo_clean.csv' password='' server='' />
+          </named-connection>
+          <named-connection caption='conversion_lift' name='textscan.0dcnwee10sq4qr188moxf027vbj9'>
+            <connection class='textscan' directory='C:/Users/ASUS/Desktop/courses/projects/week_5/targaryan/data/analysis_tables' filename='conversion_lift.csv' password='' server='' />
+          </named-connection>
+          <named-connection caption='page_engagement_summary' name='textscan.0nvos7n0sy70d617dbef002c8w7l'>
+            <connection class='textscan' directory='C:/Users/ASUS/Desktop/courses/projects/week_5/targaryan/data/analysis_tables' filename='page_engagement_summary.csv' password='' server='' />
+          </named-connection>
+          <named-connection caption='avg_time_spent_per_step_and_age_group' name='textscan.0zc2dql1n54qek13l7r6h1bzvwcc'>
+            <connection class='textscan' directory='C:/Users/ASUS/Desktop/courses/projects/week_5/targaryan/data/analysis_tables' filename='avg_time_spent_per_step_and_age_group.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.051pdrq1elmk2q16qhm0b0wj6t1r' name='full_funnel_performance_NEW.csv' table='[full_funnel_performance_NEW#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='string' name='variation' ordinal='0' />
+            <column datatype='string' name='process_step' ordinal='1' />
+            <column datatype='integer' name='unique_visitors' ordinal='2' />
+            <column datatype='real' name='pct_of_starters_reached' ordinal='3' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[full_funnel_performance_NEW.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>variation</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[variation]</local-name>
+            <parent-name>[full_funnel_performance_NEW.csv]</parent-name>
+            <remote-alias>variation</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[full_funnel_performance_NEW.csv_69E8CA8A4C9D41E19343AEB845D93330]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>process_step</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[process_step]</local-name>
+            <parent-name>[full_funnel_performance_NEW.csv]</parent-name>
+            <remote-alias>process_step</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[full_funnel_performance_NEW.csv_69E8CA8A4C9D41E19343AEB845D93330]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>unique_visitors</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[unique_visitors]</local-name>
+            <parent-name>[full_funnel_performance_NEW.csv]</parent-name>
+            <remote-alias>unique_visitors</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[full_funnel_performance_NEW.csv_69E8CA8A4C9D41E19343AEB845D93330]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>pct_of_starters_reached</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[pct_of_starters_reached]</local-name>
+            <parent-name>[full_funnel_performance_NEW.csv]</parent-name>
+            <remote-alias>pct_of_starters_reached</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[full_funnel_performance_NEW.csv_69E8CA8A4C9D41E19343AEB845D93330]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='full_funnel_performance_NEW.csv' datatype='table' name='[__tableau_internal_object_id__].[full_funnel_performance_NEW.csv_69E8CA8A4C9D41E19343AEB845D93330]' role='measure' type='quantitative' />
+      <column caption='Pct Of Starters Reached' datatype='real' name='[pct_of_starters_reached]' role='measure' type='quantitative' />
+      <column caption='Process Step' datatype='string' name='[process_step]' role='dimension' type='nominal' />
+      <column caption='Unique Visitors' datatype='integer' name='[unique_visitors]' role='measure' type='quantitative' />
+      <column caption='Variation' datatype='string' name='[variation]' role='dimension' type='nominal' />
+      <extract _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' object-id='' units='records'>
+        <connection access_mode='readonly' author-locale='en_US' class='hyper' dbname='C:/Users/ASUS/AppData/Local/Temp/TableauTemp/#TableauTemp_0p4fe8e05c969c19acwaj1pa278h.hyper' default-settings='hyper' schema='Extract' sslmode='' tablename='Extract' update-time='01/05/2026 03:37:46 PM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>variation</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[variation]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>variation</remote-alias>
+              <ordinal>0</ordinal>
+              <family>full_funnel_performance_NEW.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[full_funnel_performance_NEW.csv_69E8CA8A4C9D41E19343AEB845D93330]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>process_step</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[process_step]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>process_step</remote-alias>
+              <ordinal>1</ordinal>
+              <family>full_funnel_performance_NEW.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>5</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[full_funnel_performance_NEW.csv_69E8CA8A4C9D41E19343AEB845D93330]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>unique_visitors</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[unique_visitors]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>unique_visitors</remote-alias>
+              <ordinal>2</ordinal>
+              <family>full_funnel_performance_NEW.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>10</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[full_funnel_performance_NEW.csv_69E8CA8A4C9D41E19343AEB845D93330]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>pct_of_starters_reached</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[pct_of_starters_reached]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>pct_of_starters_reached</remote-alias>
+              <ordinal>3</ordinal>
+              <family>full_funnel_performance_NEW.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>9</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[full_funnel_performance_NEW.csv_69E8CA8A4C9D41E19343AEB845D93330]</object-id>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout common-percentage='1' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' user-set-layout-v2='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Germany&quot;' />
+      </semantic-values>
+      <object-graph>
+        <objects>
+          <object caption='full_funnel_performance_NEW.csv' id='full_funnel_performance_NEW.csv_69E8CA8A4C9D41E19343AEB845D93330'>
+            <properties context=''>
+              <relation connection='textscan.051pdrq1elmk2q16qhm0b0wj6t1r' name='full_funnel_performance_NEW.csv' table='[full_funnel_performance_NEW#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='string' name='variation' ordinal='0' />
+                  <column datatype='string' name='process_step' ordinal='1' />
+                  <column datatype='integer' name='unique_visitors' ordinal='2' />
+                  <column datatype='real' name='pct_of_starters_reached' ordinal='3' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Extract' table='[Extract].[Extract]' type='table' />
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+    <datasource caption='avg_time_spent_per_step' inline='true' name='federated.14jj9wp1hs9emt145rtxd0ofwj1g' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='avg_time_spent_per_step' name='textscan.1aqoptb0x8bfe6159f4tu0jee9uq'>
+            <connection class='textscan' directory='C:/Users/ASUS/Desktop/courses/projects/week_5/targaryan/data/analysis_tables' filename='avg_time_spent_per_step.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.1aqoptb0x8bfe6159f4tu0jee9uq' name='avg_time_spent_per_step.csv' table='[avg_time_spent_per_step#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='string' name='variation' ordinal='0' />
+            <column datatype='string' name='current_step' ordinal='1' />
+            <column datatype='real' name='avg_duration_seconds' ordinal='2' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[avg_time_spent_per_step.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>variation</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[variation]</local-name>
+            <parent-name>[avg_time_spent_per_step.csv]</parent-name>
+            <remote-alias>variation</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[avg_time_spent_per_step.csv_C220EA3A6CD64F0EA0AD545C0B6BD22F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>current_step</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[current_step]</local-name>
+            <parent-name>[avg_time_spent_per_step.csv]</parent-name>
+            <remote-alias>current_step</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[avg_time_spent_per_step.csv_C220EA3A6CD64F0EA0AD545C0B6BD22F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>avg_duration_seconds</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[avg_duration_seconds]</local-name>
+            <parent-name>[avg_time_spent_per_step.csv]</parent-name>
+            <remote-alias>avg_duration_seconds</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[avg_time_spent_per_step.csv_C220EA3A6CD64F0EA0AD545C0B6BD22F]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='avg_time_spent_per_step.csv' datatype='table' name='[__tableau_internal_object_id__].[avg_time_spent_per_step.csv_C220EA3A6CD64F0EA0AD545C0B6BD22F]' role='measure' type='quantitative' />
+      <column caption='Avg Duration Seconds' datatype='real' name='[avg_duration_seconds]' role='measure' type='quantitative' />
+      <column caption='Current Step' datatype='string' name='[current_step]' role='dimension' type='nominal' />
+      <column caption='Variation' datatype='string' name='[variation]' role='dimension' type='nominal' />
+      <extract _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' object-id='' units='records'>
+        <connection access_mode='readonly' author-locale='en_US' class='hyper' dbname='C:/Users/ASUS/AppData/Local/Temp/TableauTemp/#TableauTemp_1tqlxlh1mw7108115r57c1b4qmy8.hyper' default-settings='hyper' schema='Extract' sslmode='' tablename='Extract' update-time='01/05/2026 03:38:14 PM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>variation</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[variation]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>variation</remote-alias>
+              <ordinal>0</ordinal>
+              <family>avg_time_spent_per_step.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[avg_time_spent_per_step.csv_C220EA3A6CD64F0EA0AD545C0B6BD22F]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>current_step</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[current_step]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>current_step</remote-alias>
+              <ordinal>1</ordinal>
+              <family>avg_time_spent_per_step.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>5</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[avg_time_spent_per_step.csv_C220EA3A6CD64F0EA0AD545C0B6BD22F]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>avg_duration_seconds</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[avg_duration_seconds]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>avg_duration_seconds</remote-alias>
+              <ordinal>2</ordinal>
+              <family>avg_time_spent_per_step.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>10</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[avg_time_spent_per_step.csv_C220EA3A6CD64F0EA0AD545C0B6BD22F]</object-id>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Germany&quot;' />
+      </semantic-values>
+      <object-graph>
+        <objects>
+          <object caption='avg_time_spent_per_step.csv' id='avg_time_spent_per_step.csv_C220EA3A6CD64F0EA0AD545C0B6BD22F'>
+            <properties context=''>
+              <relation connection='textscan.1aqoptb0x8bfe6159f4tu0jee9uq' name='avg_time_spent_per_step.csv' table='[avg_time_spent_per_step#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='string' name='variation' ordinal='0' />
+                  <column datatype='string' name='current_step' ordinal='1' />
+                  <column datatype='real' name='avg_duration_seconds' ordinal='2' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Extract' table='[Extract].[Extract]' type='table' />
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Sheet 1'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run underline='true'>Funnel Performance</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='full_funnel_performance_NEW' name='federated.0po1ji00iy7hw714lqger0v9nszy' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0po1ji00iy7hw714lqger0v9nszy'>
+            <column-instance column='[process_step]' derivation='None' name='[none:process_step:nk]' pivot='key' type='nominal' />
+            <column-instance column='[variation]' derivation='None' name='[none:variation:nk]' pivot='key' type='nominal' />
+            <column caption='Process Step' datatype='string' name='[process_step]' role='dimension' type='nominal' />
+            <column-instance column='[unique_visitors]' derivation='Sum' name='[sum:unique_visitors:qk]' pivot='key' type='quantitative' />
+            <column caption='Unique Visitors' datatype='integer' name='[unique_visitors]' role='measure' type='quantitative' />
+            <column caption='Variation' datatype='string' name='[variation]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <manual-sort column='[federated.0po1ji00iy7hw714lqger0v9nszy].[none:process_step:nk]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;start&quot;</bucket>
+              <bucket>&quot;step_1&quot;</bucket>
+              <bucket>&quot;step_2&quot;</bucket>
+              <bucket>&quot;step_3&quot;</bucket>
+              <bucket>&quot;confirm&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='width' field='[federated.0po1ji00iy7hw714lqger0v9nszy].[none:variation:nk]' value='304' />
+            <format attr='width' field='[federated.0po1ji00iy7hw714lqger0v9nszy].[none:process_step:nk]' value='126' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0po1ji00iy7hw714lqger0v9nszy].[none:variation:nk]' />
+              <text column='[federated.0po1ji00iy7hw714lqger0v9nszy].[sum:unique_visitors:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.0po1ji00iy7hw714lqger0v9nszy].[none:variation:nk] * [federated.0po1ji00iy7hw714lqger0v9nszy].[sum:unique_visitors:qk])</rows>
+        <cols>[federated.0po1ji00iy7hw714lqger0v9nszy].[none:process_step:nk]</cols>
+      </table>
+      <simple-id uuid='{EC6D65AB-9A8F-480C-88EA-44E9792928AF}' />
+    </worksheet>
+    <worksheet name='Sheet 2'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Funnel: Conversion Rate Overview (From Start)</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='full_funnel_performance_NEW' name='federated.0po1ji00iy7hw714lqger0v9nszy' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0po1ji00iy7hw714lqger0v9nszy'>
+            <column-instance column='[process_step]' derivation='None' name='[none:process_step:nk]' pivot='key' type='nominal' />
+            <column-instance column='[variation]' derivation='None' name='[none:variation:nk]' pivot='key' type='nominal' />
+            <column caption='Pct Of Starters Reached' datatype='real' name='[pct_of_starters_reached]' role='measure' type='quantitative' />
+            <column caption='Process Step' datatype='string' name='[process_step]' role='dimension' type='nominal' />
+            <column-instance column='[pct_of_starters_reached]' derivation='Sum' name='[sum:pct_of_starters_reached:qk]' pivot='key' type='quantitative' />
+            <column caption='Variation' datatype='string' name='[variation]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <manual-sort column='[federated.0po1ji00iy7hw714lqger0v9nszy].[none:process_step:nk]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;start&quot;</bucket>
+              <bucket>&quot;step_1&quot;</bucket>
+              <bucket>&quot;step_2&quot;</bucket>
+              <bucket>&quot;step_3&quot;</bucket>
+              <bucket>&quot;confirm&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='width' field='[federated.0po1ji00iy7hw714lqger0v9nszy].[none:process_step:nk]' value='149' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0po1ji00iy7hw714lqger0v9nszy].[none:variation:nk]' />
+              <text column='[federated.0po1ji00iy7hw714lqger0v9nszy].[sum:pct_of_starters_reached:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.0po1ji00iy7hw714lqger0v9nszy].[none:variation:nk] * [federated.0po1ji00iy7hw714lqger0v9nszy].[sum:pct_of_starters_reached:qk])</rows>
+        <cols>[federated.0po1ji00iy7hw714lqger0v9nszy].[none:process_step:nk]</cols>
+      </table>
+      <simple-id uuid='{44712D81-43D7-471E-8C4D-1601764D2C1E}' />
+    </worksheet>
+    <worksheet name='Sheet 3'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Avg. Time Spent Per Page</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='avg_time_spent_per_step' name='federated.14jj9wp1hs9emt145rtxd0ofwj1g' />
+          </datasources>
+          <datasource-dependencies datasource='federated.14jj9wp1hs9emt145rtxd0ofwj1g'>
+            <column caption='Avg Duration Seconds' datatype='real' name='[avg_duration_seconds]' role='measure' type='quantitative' />
+            <column caption='Current Step' datatype='string' name='[current_step]' role='dimension' type='nominal' />
+            <column-instance column='[current_step]' derivation='None' name='[none:current_step:nk]' pivot='key' type='nominal' />
+            <column-instance column='[variation]' derivation='None' name='[none:variation:nk]' pivot='key' type='nominal' />
+            <column-instance column='[avg_duration_seconds]' derivation='Sum' name='[sum:avg_duration_seconds:qk]' pivot='key' type='quantitative' />
+            <column caption='Variation' datatype='string' name='[variation]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.14jj9wp1hs9emt145rtxd0ofwj1g].[none:current_step:nk]'>
+            <groupfilter function='except' user:ui-domain='relevant' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:current_step:nk]' />
+              <groupfilter function='member' level='[none:current_step:nk]' member='&quot;confirm&quot;' />
+            </groupfilter>
+          </filter>
+          <manual-sort column='[federated.14jj9wp1hs9emt145rtxd0ofwj1g].[none:current_step:nk]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;start&quot;</bucket>
+              <bucket>&quot;step_1&quot;</bucket>
+              <bucket>&quot;step_2&quot;</bucket>
+              <bucket>&quot;step_3&quot;</bucket>
+              <bucket>&quot;confirm&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <slices>
+            <column>[federated.14jj9wp1hs9emt145rtxd0ofwj1g].[none:current_step:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='width' field='[federated.14jj9wp1hs9emt145rtxd0ofwj1g].[none:variation:nk]' value='277' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.14jj9wp1hs9emt145rtxd0ofwj1g].[none:variation:nk]' />
+              <text column='[federated.14jj9wp1hs9emt145rtxd0ofwj1g].[sum:avg_duration_seconds:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.14jj9wp1hs9emt145rtxd0ofwj1g].[none:current_step:nk] * [federated.14jj9wp1hs9emt145rtxd0ofwj1g].[sum:avg_duration_seconds:qk])</rows>
+        <cols>[federated.14jj9wp1hs9emt145rtxd0ofwj1g].[none:variation:nk]</cols>
+      </table>
+      <simple-id uuid='{4BFA5555-65A9-45B4-8C64-3178E8EA721F}' />
+    </worksheet>
+    <worksheet name='Sheet 4'>
+      <table>
+        <view>
+          <datasources />
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{FD986B89-9E73-4ACF-BAEF-7EE08CF42596}' />
+    </worksheet>
+  </worksheets>
+  <windows saved-dpi-scale-factor='1.5' source-height='137'>
+    <window class='worksheet' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='30'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='2' param='[federated.0po1ji00iy7hw714lqger0v9nszy].[none:variation:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{9114E067-6D7C-440B-956F-F7B5DAAE4B35}' />
+    </window>
+    <window class='worksheet' name='Sheet 2'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='30'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.0po1ji00iy7hw714lqger0v9nszy].[none:variation:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{8717F1C9-C365-4D22-99D0-99DC4A3F3D1C}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Sheet 3'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='30'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.14jj9wp1hs9emt145rtxd0ofwj1g].[none:variation:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{56685257-CBC3-4F35-97FC-9D09B40D698E}' />
+    </window>
+    <window class='worksheet' name='Sheet 4'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='30'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{0A212FEA-7483-45B8-AA4B-4238CA4738BD}' />
+    </window>
+  </windows>
+</workbook>
