@@ -1,5 +1,5 @@
 
-# Ravenclaw Gaming Investment Group
+# Targaryen Group
 
 ## Team Members:
 Alan Lupatini
