@@ -1,0 +1,11 @@
+variation,process_step,total_visits,unique_visitors,unique_clients,visits_per_client_ratio
+Control,start,23397,23319,23397,1.00
+Control,step_1,19209,17484,17553,1.09
+Control,step_2,18358,15295,15346,1.20
+Control,step_3,17094,14497,14545,1.18
+Control,confirm,14103,13174,13221,1.07
+Test,start,26679,26593,26679,1.00
+Test,step_1,22671,20689,20769,1.09
+Test,step_2,21327,19047,19123,1.12
+Test,step_3,19829,18348,18426,1.08
+Test,confirm,19862,17241,17317,1.15

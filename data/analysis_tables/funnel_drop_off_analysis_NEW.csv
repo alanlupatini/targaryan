@@ -1,0 +1,11 @@
+variation,process_step,unique_clients,prev_step_clients,retention_from_prev_step_pct
+Control,start,23397,NULL,NULL
+Control,step_1,17553,23397,75.02244
+Control,step_2,15346,17553,87.42665
+Control,step_3,14545,15346,94.78040
+Control,confirm,13221,14545,90.89722
+Test,start,26679,NULL,NULL
+Test,step_1,20769,26679,77.84775
+Test,step_2,19123,20769,92.07473
+Test,step_3,18426,19123,96.35517
+Test,confirm,17317,18426,93.98133

@@ -1,0 +1,11 @@
+Variation,process_step,unique_visitors,prev_step_visitors,retention_from_prev_step_pct
+Control,start,25908,NULL,NULL
+Control,step_1,21234,25908,81.9592
+Control,step_2,19165,21234,90.2562
+Control,step_3,17699,19165,92.3506
+Control,confirm,15566,17699,87.9485
+Test,start,28736,NULL,NULL
+Test,step_1,25554,28736,88.9268
+Test,step_2,22978,25554,89.9194
+Test,step_3,21270,22978,92.5668
+Test,confirm,19505,21270,91.7019

@@ -1,0 +1,11 @@
+Variation,process_step,unique_visitors,pct_of_starters_reached
+Control,start,25908,100.0000
+Control,step_1,21234,81.9592
+Control,step_2,19165,73.9733
+Control,step_3,17699,68.3148
+Control,confirm,15566,60.0818
+Test,start,28736,100.0000
+Test,step_1,25554,88.9268
+Test,step_2,22978,79.9624
+Test,step_3,21270,74.0187
+Test,confirm,19505,67.8765
