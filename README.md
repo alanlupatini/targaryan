@@ -34,7 +34,14 @@ Third dataset (f_final_de) is composed by the demographics: cliend_id, clnt_tenu
 
 ## Final project presentation
 The results from the analysis can be found in the presentation slides of the project:
-XXXXXXXXXXXXXXXXXXXXXX
+
+Google Slides
+https://docs.google.com/presentation/d/1UzFUm5n8xV6y3JB86S_7T5vD-jrlLIJaflm5zIP1oEU/edit?slide=id.g3b56f06efb1_2_0#slide=id.g3b56f06efb1_2_0
+
+Tableu Public
+https://public.tableau.com/app/profile/carmelina.mbesso/viz/Kpisdashboard_17678791075060/STORY?publish=yes
+
+
 
 ## Tools & Libraries
 - Python 3  
@@ -45,6 +52,8 @@ XXXXXXXXXXXXXXXXXXXXXX
 - GitHub (collaboration)
 - MySQL (data manipulation)
 - DrawnBD (Visualization)
+- Tableu (visualization)
+- Google Slides (Presentation)
 
 ## Day 1/2 - Project Initiation & Data Cleaning
 Os Day 1 and 2, the team created the enviroment, repository, Trelo board. 
@@ -61,7 +70,7 @@ We created the repository and defined the collaboration status for all group mem
 
 
 ## Objectives:
-Trying to ask the qestions: 
+Trying to ask the questions: 
 Who are the primary clients using this online process?
 Are the primary clients younger or older, new or long-standing?
 Carried out a client behaviour analysis to answer any additional relevant questions you think are important.
@@ -86,30 +95,49 @@ Error Rates: If there's a step where users go back to a previous step, it may in
 Anwser this: Based on the chosen KPIs, how does the new design's performance compare to the old one?
 
 
-## Day 4/5 -
+## Day 4/5 
 ## Objectives:
 Conduct hypothesis testing to make data-driven conclusions about the effectiveness of the redesign
 
+## Day 6/7 
+Defined metrics of the A/B experiment you will visually present in Tableau
+Imported the cleaned and processed data into Tableau
+Created a dashboard showcasing the A/B test results, including completion rates, time spent on each step, error rates for both the Test and Control groups and/or any KPIs you've defined for this business case
+Used Tableau's filtering and drilling capabilities to allow viewers to explore data based on demographics, such as age groups or gender
+Incorporated visualizations from the EDA section to provide context
 
-
-## Day 6 -
-
-## Day 7 - 
-
-## Day 8 - 
-
-## Day 9 - 
+## Day 8/9
+We created the full presentation on Google Slides
+We made a story in tableu, with some key-insights
 
 ## Day 10 - Presentation 
 
 
+###  Calculated metrics
+Conversion Rate (CR) > Amount of Starters that reached Confirmation page.
+Error Rate > The rate in which users loaded the same page more than once or navigated back into the funnel.
+Time Spent on Page > The amount of time lapsed between loading a page into the funnel and the next page load (unavailable in last page seen in funnel).
+Confidence Level > Metric that calculates if the traffic and CR are statistically significant.
 
-
-### 1. Data Transformation
 
 ### 2. Analysis & Conclusions
 
+Middle age group (30-50) are the primary clients using the online process, with >4 logons in the last 6 months, if we look at the >16 tenure group. 
+We’ve noted that all demographic groups, and all tenure group made at least 3 logons in the last 6 months. 
+
+Looking at average account balance by age, we can clearly see that seniors (>50 years) are the primary clients peaking at 300.000. 
+Male clients also almost double female clients, in this analysis, with a peak of 170.000.
+
+In the analysis of the data, regarding the new website, the new design (Test) resulted in FEWER errors!
+
+Users in the Test group experienced 31% fewer backward movements compared to Control
+The new, intuitive UI and in-context prompts successfully reduced confusion
+Users navigated the process more smoothly with fewer mistakes
+The modern interface helps users understand what to do at each step
+
+
 ### 3. Challenges in the Project
+
 
 
 
